@@ -1,0 +1,36 @@
+﻿@model IGSDeveloperTest.Models.AdministrationViewModels
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using GridMvc.Html
+@using IGSDeveloperTest.Datamodel
+
+ 
+
+<div class="row">
+    <div class="col-md-4">
+        <h3>Title</h3>
+    </div>
+    <div class="col-md-4">
+        <h3>Gender</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <h3>Company</h3>
+        @Html.Grid(Model.CompanyList).Columns(c =>
+        {
+            c.Add().Encoded(false).Sanitized(false).SetWidth(30).RenderValueAs(o => @<button type="submit">Edit</button>);
+            c.Add(company => company.Name).Titled("Company Name").Filterable(true);
+            c.Add(company => company.AddressLine1).Titled("Address Line 1");
+            c.Add(company => company.AddressLine2).Titled("Address Line 2");
+            c.Add(company => company.AddressLine3).Titled("Address Line 3");
+            c.Add(company => company.AddressLine4).Titled("Address Line 4");
+            c.Add(company => company.PostCode).Titled("Post Code");
+            c.Add(company => company.TelephoneNumber).Titled("Telephone");
+        }).WithPaging(20)
+    </div>
+</div>
+
+
